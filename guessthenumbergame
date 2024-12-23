@@ -1,0 +1,38 @@
+/**
+ *
+ * @author Marco Navarro
+ */
+import javax.swing.JOptionPane;
+
+public class Main {
+    public static void main(String[] args) {
+        int numberToGuess = (int) (Math.random() * 100) + 1; // Random number between 1 and 100
+        boolean hasWon = false;
+
+        while (!hasWon) {
+            String input = JOptionPane.showInputDialog("Guess a number between 1 and 100:");
+
+            if (input == null) { // User clicked "Cancel"
+                JOptionPane.showMessageDialog(null, "Game exited. Goodbye!");
+                return;
+            }
+
+            int guess;
+            try {
+                guess = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Please enter a valid number.");
+                continue;
+            }
+
+            if (guess < numberToGuess) {
+                JOptionPane.showMessageDialog(null, "Too low! Try again.");
+            } else if (guess > numberToGuess) {
+                JOptionPane.showMessageDialog(null, "Too high! Try again.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Congratulations! You guessed it!");
+                hasWon = true;
+            }
+        }
+    }
+}
